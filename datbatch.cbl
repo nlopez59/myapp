@@ -13,7 +13,7 @@
       *
       *
        PROCEDURE DIVISION.
-           DISPLAY 'BATCH DEMO f-b1'.
+           DISPLAY 'BATCH DEMO f-a1'.
 
       * do something ...
            PERFORM VARYING num1 FROM 0 BY 1 UNTIL num1 > num2
