@@ -1,0 +1,75 @@
+{
+    "$schema": "./zowe.schema.json",
+    "myNotes": [
+        "- Zowe does not honor local .ssh/config. So you'll need to repeat them here.",
+        "- For `connection refused` error, check that the Service(STC/Daemon) is active on and on the right port.",
+        "- For `Rest API failure with HTTP(S) status 404` check zOSMF props. In one case I fix it by removing the baseapi key from the project_base. It must be a default?",
+        "- Sometimes Zowe`s cache can create issues like adding credentials when switching zOS hosts. In that case, restart vs code.",
+        "- If the cics profile errors out, run (f1) `zowe explorer: update profile ..."
+    ],
+    "profiles": {
+        "poc-waas-ssh": {
+            "type": "ssh",
+            "properties": {
+                "host": "poc-waas",
+                "privateKey": "C:/Users/NelsonLopez1/.ssh/id_rsa"
+            }
+        },
+        "poc-waas-zosmf": {
+            "type": "zosmf",
+            "properties": {
+                "host": "poc-waas",
+                "port": 10443
+            }
+        },
+        "poc-waas-cics": {
+            "type": "cics",
+            "properties": {
+                "host": "poc-waas",
+                "port": 8154
+            }
+        },
+        "zOpenDebug": {
+            "type": "zOpenDebug",
+            "COMMENT0": "Host api too old use other hosts",         
+            "properties": {
+                "host": "poc-waas",
+                "COMMENT1": "DPS (Profile service) port connect to the EQAPROF STC, Non-ssl",
+                "dpsPort": 8192,
+                "dpsContextRoot": "api/v1",
+                "dpsSecured": true,
+                "COMMENT2": "RDS (Remote Client service) port connect to the EQARMTD STC. SECURED",
+                "rdsPort": 8194,
+                "rdsSecured": true,
+                "COMMENT3": "Basic racf userid/password login credentials",
+                "authenticationType": "basic",
+                "uuid": "e91d29b6-959f-4e17-b23d-4394fc8c0a7b"
+            },
+            "secure": [
+                "user",
+                "password"
+            ]
+        },
+        "project_base": {
+            "type": "base",
+            "properties": {
+                "COMMENT0": "In the real world dont add any personal vars in the team zowe config. This is for demo only.",
+                "host": "poc-waas",
+                "privateKey": "C:/Users/NelsonLopez1/.ssh/id_rsa-key",
+                "protocol": "https",
+                "rejectUnauthorized": false
+            },
+            "secure": [
+                "user",
+                "password"
+            ]
+        }
+    },
+    "autoStore": true,
+    "defaults": {
+        "zosmf": "poc-waas-zosmf",
+        "ssh": "poc-waas-ssh",
+        "rse": "poc-waas-rse",
+        "base": "project_base"
+    }
+}

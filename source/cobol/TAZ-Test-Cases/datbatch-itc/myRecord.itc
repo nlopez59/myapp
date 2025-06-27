@@ -1,0 +1,16 @@
+{
+	"testCases": [
+		{
+			"name": "myRecord", 
+			"createdBy": "", 
+			"description": "new itc", 
+			"dataset": "/zdevops/poc-app/cobol/TAZ-Test-Cases/datbatch-itc/myRecord.rec", 
+			"type": "Batch", 
+			"userLibs": [
+				{
+					"lib": "IBMUSER.IDZ.LOAD"
+				}
+			]
+		}
+	]
+}

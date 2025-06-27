@@ -1,0 +1,40 @@
+//IBMUSERD JOB CLASS=A,MSGCLASS=H,MSGLEVEL=(1,1),REGION=0M
+//*
+//* Debug demo for vsCode or IDz
+//DBG    EXEC PGM=DATBATCH,PARM='1/TEST(ALL,,,RDS:*)'
+//*DBG    EXEC PGM=ASAMPLE,PARM='1/TEST(ALL,,,RDS:*)'
+//*STEPLIB  DD  DISP=SHR,DSN=ZDEV.MAIN.LOAD
+//*STEPLIB  DD  DISP=SHR,DSN=IBMUSER.IDZ.LOAD
+//STEPLIB   DD  DISP=SHR,DSN=IBMUSER.VSCODE.LOAD
+//SYSOUT    DD SYSOUT=*
+//*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//* Alternative method to park a batch pgm
+//*CEEOPTS  DD *
+//*  TEST(ALL,,,RDS:*)
+//*

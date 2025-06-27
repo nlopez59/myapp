@@ -1,0 +1,20 @@
+{
+	"testCases": [
+		{
+			"dataset": "/zdevops/poc-app/cobol/TAZ-Test-Cases/datbatch-itc/myRecord.rec", 
+			"dateRecorded": "2025121075348339", 
+			"dateReplayed": "2025122132258114", 
+			"jobName": "IBMZEDT", 
+			"jobNumber": "JOB00285", 
+			"userId": "IBMUSER", 
+			"returnCode": 0, 
+			"transactions": [
+				{
+					"name": "DATBATCH", 
+					"returnCode": 0
+				}
+			], 
+			"type": "Batch"
+		}
+	]
+}

@@ -1,0 +1,56 @@
+Cut/paste these CICS cmds to the oper Console
+wazi-5 cics stc is cicsts62 
+
+
+c cicsts62
+s cicsts62 
+F CICSTS62,CEMT PERF SHUT IMMED
+
+*Interesting debug cics resoruces 
+
+* Inquriy on all defined TCPIP Service that are mapping to a URI
+F CICSTS62,CEMT INQ TCPIPS
+
+* Inqury about all the tcpip uri mappings 
+F CICSTS62,CEMT INQ URI 
+
+** check EQA CICS CON/SESS   CANT RUN CEDA??  USE CICSTERM 
+F CICSTS62,CEDA DISPLAY GROUP(EQA)
+
+
+** my demo app 
+F CICSTS62,CEMT SET PROG(DATDEMO) PHASEIN 
+F CICSTS62,CEMT SET PROG(DATMAPM) PHASEIN    
+ 
+
+F CICSTS62,CEDA INSTALL GROUP(DAT)
+
+* Add a na rpl on the fly 
+F CICSTS62,CEMT INQ LIB
+F CICSTS62,CEDA ALT Lib(DATRPL) GROUP(DAT) 
+? how to add/updt a lib def
+
+CICS TERM CND REF:
+  cefn    logoff 
+  dtcn ?
+  dat0    my demo app 
+  cemt    gen util 
+  ceda    adv util 
+
+
+
+  
+* DEFINE LIBRARY(LIBNAME) GROUP(GROUPNAME) DSNAME('DATA.SET.NAME') ENABLE
+* need new ver of newcopy without rpl lib depend
+* Note: my poc-waas cicsts62 region has a Lib resource for new copy 
+
+* cemt inq lib will; show 
+  zdev.main.cicsload is the rpl 
+
+* that lib is not in the rpl dd 
+DEFINE LIBRARY(DATRPL) GROUP(DAT???)) 
+       DSNAME('zdev.main.cicsload') 
+       TYPE(PROGRAM)
+       STATUS(ENABLED)
+       USAGE(LOAD)
+       DESCRIPTION('My demo tran') 

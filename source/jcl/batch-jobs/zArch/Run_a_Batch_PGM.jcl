@@ -1,0 +1,6 @@
+//IBMUSERA JOB CLASS=A,MSGCLASS=H,MSGLEVEL=(1,1),REGION=0M
+//* a comment 
+//* A simple batch program submitted to JES  
+//DEMO     EXEC PGM=BATCHPGM
+//STEPLIB  DD  DISP=SHR,DSN=IBMUSER.VSCODE.LOAD
+//SYSOUT   DD  SYSOUT=*

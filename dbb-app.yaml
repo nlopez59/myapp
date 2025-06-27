@@ -1,0 +1,41 @@
+---
+###
+# NJL - v2
+# Notes: This file defines the 2 basic steps to compile and link a cobol program
+# Dependency path and compile/linked options globally define in central zdevops/conf/build/Cobol.yaml
+# On first vsCode Buil, run the full upload option to copy this file to USS.  Then use User build only
+# REF: https://www.ibm.com/docs/en/dbb/3.0?topic=concepts-application-configuration
+# ...
+version: 1.0.0
+application:
+  name: poc-app      # sets the APPLICATION context var used in dependancypath and collection name  its also the subfolder root of all source code
+
+  tasks:
+    - task: Cobol
+      variables:     
+        # njl-mod: defaultParms is a way to include your application specif compiler options with the defaults in Cobol.yaml
+        #          The only restriction is that defaultParms cant be null.  
+        #          note: The normal beahovire is the dbb-app override 'all' default compiler options in Cobol.yaml like "IC_CICS"       
+        - name: defaultParms
+          value: COPYRIGHT('IBM DevOps Sample') 
+
+        # When this var is defined, it enables the compiler 'test' in Cobol.yaml. THis is needed for the IBM Debugger. 
+        - name: debug      
+          value: true 
+
+        # Test User define syslib concat ???
+        - name: cob_syslib1
+          value: "zdev.dev.copybook"
+
+    - task: ImpactAnalysis
+      variables:
+        - name: impactQueryPatterns
+          value:
+            - languageExt: cbl      
+              dependencyPatterns: 
+                - "**.cpy"
+                - "**.bms"
+                - "**.cbl"
+            - languageExt: lnk                    
+              dependencyPatterns: 
+                - "**.cbl"      

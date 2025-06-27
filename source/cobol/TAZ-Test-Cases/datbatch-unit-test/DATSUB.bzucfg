@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<runner:RunnerConfiguration xmlns:runner="http://www.ibm.com/zUnit/4.0.0.0/TestRunner" id="f87c905b-dca6-432a-afa0-1baf3c9985be">
+  <runner:options contOnTestCaseError="false" contOnTestCaseFail="true" contOnTestError="false" contOnTestFail="true" fileIOCapture="compat"/>
+  <runner:testCase moduleName="TDATSUB">
+    <test name="TC1" entry="TEST_TC1" type="BTCH" init="BZU_INIT" term="BZU_TERM" program="DATSUB" commarea="0" skipTest="false" resetFile="true" stubCall="true" dummy="false" noPlaybackData="false"/>
+    <test name="TC2" entry="TEST_TC2" type="BTCH" init="BZU_INIT" term="BZU_TERM" program="DATSUB" commarea="0" skipTest="false" resetFile="true" stubCall="true" dummy="false" noPlaybackData="false"/>
+    <test name="TC3" entry="TEST_TC3" type="BTCH" init="BZU_INIT" term="BZU_TERM" program="DATSUB" commarea="0" skipTest="false" resetFile="true" stubCall="true" dummy="false" noPlaybackData="false"/>
+    <test name="TC4" entry="TEST_TC4" type="BTCH" init="BZU_INIT" term="BZU_TERM" program="DATSUB" commarea="0" skipTest="false" resetFile="true" stubCall="true" dummy="false" noPlaybackData="false"/>
+  </runner:testCase>
+  <runner:intercept module="DATSUB" stub="false" lengths="38" parmtype="I" retcode="true" exist="false"/>
+  <runner:playback moduleName="DATSUB">
+    <playbackFile name="&lt;HLQ>.ZTEST.REC.DATSUB" localName="DATSUB.rec"/>
+  </runner:playback>
+  <runner:fileAttributes hlqDdName="AZUHLQ"/>
+</runner:RunnerConfiguration>

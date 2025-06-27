@@ -1,0 +1,98 @@
+name: "poc-app-zapp"
+description: | 
+  This is a sample IBM Z Open Editor zapp.yaml for DBB V3. 
+  
+  Change the VS Code user's settings.json dbbHLQ to defines the a developer's 
+  personal PDS HLQ's for building and testing a feature. 
+
+  ref: 
+    - DBB v3:               https://www.ibm.com/docs/en/dbb/3.0?topic=samples-user-build
+    - OpenEditor zapp.yaml: https://ibm.github.io/zopeneditor-about/Docs/zapp.html#zapp-use-cases  
+  
+  Tech Notes: - The main settings.json is in this multiRoot project's workspace file. Its not a local  file. Simple project can use .vscode/settings.json 
+              - OpenEdit fails to mkdir the users dbbWorkspace so do it manually before runing  
+              - Always run a full upload build to init the working dir with dbb-build.yaml
+              - the user zapp  "dbbWorkspace": "/u/ibmuser/vscode",
+              - the user zapp  "dbbHlq": "IBMUSER.VSCODE"   
+
+
+version: "3.0.0"
+author:
+  name: "ANY_NAME"
+
+
+profiles:
+- name: "Idz_dbb-userbuild"
+  type: "dbb"
+  settings:
+    #command: ". /etc/profile; export DBB_BUILD=/u/ibmuser/zdevops/conf/build; $DBB_HOME/bin/sclient 127.0.0.1 8080 $DBB_HOME/bin/dbb  build"
+    # /etc/profile has all the env vars for dbb++
+    command: ". /etc/profile; time $DBB_HOME/bin/dbb  build"
+    lifecycle: "user"
+    lifecycleArgs:
+    - "--hlq ${zopeneditor.userbuild.userSettings.dbbHlq} "
+    additionalDependencies:
+    - "dbb-app.yaml"
+    logFilePatterns:
+    - "*.log"
+
+- name: "dbb-userbuild"
+  type: "dbb"
+  settings:
+    #command: ". /etc/profile; export DBB_BUILD=/u/ibmuser/zdevops/conf/build; $DBB_HOME/bin/dbb build"
+    #command: ". /etc/profile; time dbb  build"
+    
+    # Notes on using DBBS on virt zOS env:
+    # Its broken on ODT! Dont use it  
+    #  - As of dbb 3.0.1 the sclient moved from bin to lib and on a new port.  
+    #  - dbbs daemon process defined /etc/dbb  but its old so replace it  (see my repo)
+    #  - The /usr/lpp/IBM/dbb/conf/startdaemon.sh port now port 8180 
+
+    # one mo time 
+    #command: ". /etc/profile; set; $DBB_HOME/lib/sclient -DBB_DAEMON_HOST 127.0.0.1 -DBB_DAEMON_PORT 8180 $DBB_HOME/bin/dbb  build"
+    #command: ". /etc/profile; set;  time dbb   -DBB_DAEMON_PORT 8180 build"
+    command: ". /etc/profile; dbb   -DBB_DAEMON_PORT 8180       build "
+    #command: ". /etc/profile; set;  time $DBB_HOME/bin/dbb build"
+
+
+    lifecycle: "user"
+    lifecycleArgs:
+    - "--hlq ${zopeneditor.userbuild.userSettings.dbbHlq}"
+    
+    additionalDependencies:
+    - "dbb-app.yaml"
+    #- "poc-app/header"
+
+    logFilePatterns:
+    - "${buildFile.basename}-*.log"
+    - "BuildReport.H*"
+
+
+propertyGroups:
+- name: cobol-copybooks
+  language: cobol
+  libraries:
+    - name: syslib
+      type: local
+      locations:
+        - "**/copybook"
+        - "**/bms"
+    - name: syslib
+      type: mvs
+      locations:
+        - "IBMUSER.IDZ.BMS.COPY"
+        - "IBMUSER.VSCODE.BMS.COPY"
+        - "CICSTS61.CICS.SDFHCOB"
+        - "IDZ.V17R0M0.SEQASAMP"
+
+- name: asm-maclib 
+  language: hlasm
+  libraries:
+    - name: maclib
+      type: local
+      locations:
+        - "**/maclib"
+    - name: syslib
+      type: mvs
+      locations:
+        - "SYS1.MACLIB" 
