@@ -5,5 +5,5 @@
        WORKING-STORAGE SECTION.   
        COPY DATVARS.                                           
        PROCEDURE DIVISION.                                            
-           DISPLAY 'asample: test build Demo DBBS  5'.
+           DISPLAY 'asample: hn test v1'.
            STOP RUN.
