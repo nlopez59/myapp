@@ -5,5 +5,5 @@
        WORKING-STORAGE SECTION.   
        COPY DATVARS.                                           
        PROCEDURE DIVISION.                                            
-           DISPLAY 'asample: hn test v1'.
+           DISPLAY 'asample: hn test v2'.
            STOP RUN.
