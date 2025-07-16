@@ -5,5 +5,5 @@
        WORKING-STORAGE SECTION.   
        COPY DATVARS.                                           
        PROCEDURE DIVISION.                                            
-           DISPLAY 'asample: hn test v2'.
+           DISPLAY 'asample: hn test v3 file type ssh key'.
            STOP RUN.
