@@ -7,33 +7,36 @@ The first phase is to configure the varaious tools for Developers.  Once all com
 
 ## PreReqs: 
 - After installing DBB v3 or better:  
--   Obtain the install paths for: 
-        - DBB its normally in ```/usr/lpp/IBM/dbb```    
-        - Git for Z (check you SMPE install note)
-    - Ensure VS Code Users have an OMVS RACF segment with a persoanl USS Home dir.  
-    - Define DBB and Git env vars either in /etc/profile or a user's home /.profile.  As a first test, use the Z DevOps Admin's home directory. Afterwards, the env vars can be merged into /etc/profile for access by all users.  
-    - Choose a Zowe connection point to Z. Options are zOSMF or RSEAPI
-
-- Define the USS directory for DBB and other Pipeline configuration files and helper scripts:
-    - This sample repo could be use as a starter.   It contains both application source and DBB Admin files to test Developer and Pipeline builds.   
-    - Once the convertioan is stablized, Application Repos can be buiolt seperate with just hte applicaito nlevel configuration.  Not the DBB Admin files.  
-    
+- Obtain the install paths for: 
+    - DBB its normally in ```/usr/lpp/IBM/dbb```    
+    - Git for Z (check you SMPE install note)
+- Ensure VS Code Users have an OMVS RACF segment with a persoanl USS Home dir.  
+    - Define DBB and Git on the z DevOps Admin's home directory. This profile can be merged into /etc/profile for access by all users at a later time.  
 
 ## Phase1 - Z DevOps Configuration
+- Edit zowe.config.json
+    - add zOSMF or RSEAPI connection details
+    - If using zOSMF, add the connect SSH details using the Z DevOps admin RACF user
+    - Test Zowe on Z
+        - open the users USS home dir 
+        - make a folder called 'dbbworkspace' 
+            
+- Edit dbb-build.yaml 
+    - lanaguages.yaml - add the system PDS for the cobol compiler, linkedit 
 
-In the DBB install path there are sample build yaml files. These files are managed by the Z DevOps Admin and used across all application builds.  These samples can build a simple cobol batch programs.  
+- Edit the zapp.yaml
+    - add a HLQ for the DBB build 
 
 
-
-VS Code Setup: 
-- Clone this repo 
+Run A Feature build: 
+- Create a dbb workspace dir on the user's USS home dir (like dbbworkspace)
 - Create a branch 
-- Update 
-    - zapp.yaml
-    - zowe.config.json 
- 
-- Test a User Build 
-    - change the sample cobol pgm
-    - run the "IBM User Build with Full Upload" as a one time init. Afterwards a simple user build can be run unsless dbb-app.yaml changes need to be refreshed. 
-- review the local logs dir afte the build to review the Complier and linkedit sysprint logs
+- Make a change to the sample cobol pgm
+- Run "IBM User Build with Full Upload" to init or referwsh dbb-app.yaml config changes. Afterwards, run the "User Build" options (its faster).  
+- Review the local copy of the compiler and linkedit logs(sysprint)
+- pus hthe branch to your git hub server 
+
+## Phase2 - Run a pipeline 
+rbd 
+
 

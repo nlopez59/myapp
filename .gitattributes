@@ -2,3 +2,9 @@
 #    This includes all application source code across all (**) folders
 **              zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
 
+# DBB v3 yaml & Configs 
+conf/build/*.yaml zos-working-tree-encoding=iso8859-1 git-encoding=utf-8
+conf/build/*.conf zos-working-tree-encoding=iso8859-1 git-encoding=utf-8
+
+# ** 
+.gitattributes  zos-working-tree-encoding=iso8859-1 git-encoding=utf-8
