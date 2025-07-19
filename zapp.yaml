@@ -12,7 +12,11 @@ profiles:
 - name: "dbb-userbuild"
   type: "dbb"
   settings:    
-    command: ". ./.profile; dbb   build "
+    # change to ./.profile; 
+    # command: ". ./.profile; dbb build "
+
+    # For IBM Demos 
+    command: ". /etc/profile; dbb   -DBB_DAEMON_PORT 8180  build "
 
     lifecycle: "user"
     lifecycleArgs:

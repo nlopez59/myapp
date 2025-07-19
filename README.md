@@ -3,7 +3,9 @@
 **Purpose:**
 Configure VS Code with DBB, Zowe, and Open Editor to enable mainframe developers to build and test applications using modern DevOps tools.
 
-Note: Always open this project's workspace file.
+> Notes: 
+- This project has a .vscode/extensions.json file to help install required extensions 
+- User settings are defined in .vscode/settings.json.  This is for demo and early testing purposes. Once the configuration is verified, all user's should store personal settings in their local VS Code settings.json file. 
 
 > 🔒 Typically, these steps are performed by the **Z DevOps Admin**, who may collaborate with the **z/OS SysProg**, **Security**, and **Network** teams as needed.
 
