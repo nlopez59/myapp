@@ -1,52 +1,91 @@
-### DBB/VS Code Quick start notes (July 2025)
-Goal: To configure VS Code and DBB for cloning, editing and push new branches to you git Server for Pipeline builds.
+### 🛠️ DBB/VS Code Quick Start Notes (July 2025)
 
-Normally the Z DevOps Admin coordinates the steps outlined here.  They would include Git and Artofy Admin as well as Z SysProgs, Security and Network teams as needed.
+**Purpose:**
+Configure VS Code with DBB, Zowe, and Open Editor to enable mainframe developers to build and test applications using modern DevOps tools.
 
-The first phase is to configure the varaious tools for Developers.  Once all components are verified, a **small select** group of Developers can be included for further verification, learning and customization.
+> 🔒 Typically, these steps are performed by the **Z DevOps Admin**, who may collaborate with the **z/OS SysProg**, **Security**, and **Network** teams as needed.
 
-## PreReqs: 
-- After installing DBB v3 or better:  
-- Obtain the install paths for: 
-    - DBB its normally in ```/usr/lpp/IBM/dbb```    
-    - Git for Z (check you SMPE install note)
-- Ensure VS Code Users have an OMVS RACF segment with a personal USS Home dir.  
-    - Define DBB and Git on the z DevOps Admin's home directory. This profile can be merged into /etc/profile for access by all users at a later time.  
+Once these steps are completed and verified, the setup can be rolled out to a **small** group of developers for hands-on testing, learning, and further customization.
 
-## Phase1 - Z DevOps Configuration
-- Edit zowe.config.json
-    - Update the RSEAPI connection details  
-    ![zowe rse](image-1.png)  
-    - Test Zowe:
-        - open the your USS home dir 
-        - create a folder called 'dbbworkspace' 
+---
 
-- copy the dbb sample config - change the uss path to match you env 
-    - from the vs code terminal run this - but use your DBB install path 
-        scp ibmuser@taz-zos:/usr/lpp/IBM/idz/usr/lpp/IBM/dbb/build/*.yaml  config\build
-        scp ibmuser@taz-zos:/usr/lpp/IBM/idz/usr/lpp/IBM/dbb/samples/languages/*.yaml config\build
+## ✅ Prerequisites
 
+* Install **DBB v3** (or newer) and note the installation path (usually `/usr/lpp/IBM/dbb`).
+* Ensure all VS Code users:
 
-- Edit config/build/Languages.yaml 
-    - add the system PDS for the cobol compiler (SIGYCOMP). 
-    ![Lang Yaml](doc/lang-yaml.png)
+  * Have an **OMVS RACF segment**.
+  * Have a personal **USS home directory**.
+* Define DBB and other environment variables in the **Z DevOps Admin’s** `.profile`. This profile can later be merged into `/etc/profile` for system-wide access.
 
-- Edit the zdevops.code-workspace 
-    - add your HLQ to  "dbbHlq"
-    - add your rse zowe profile to  "defaultCliProfile"
-    - open this workspace fodler as a workspace i nvs Code (botton right blue box)
-    ![alt text](image.png)
+---
 
+## ⚙️ Phase 1 – Z DevOps Environment Setup
 
-Run A Feature build: 
-- Create a dbb workspace dir on the user's USS home dir (like dbbworkspace)
-- Create a branch 
-- Make a change to the sample cobol pgm
-- Run "IBM User Build with Full Upload" to init or referwsh dbb-app.yaml config changes. Afterwards, run the "User Build" options (its faster).  
-- Review the local copy of the compiler and linkedit logs(sysprint)
-- pus hthe branch to your git hub server 
+### 1. Configure Zowe
 
-## Phase2 - Run a pipeline 
-rbd 
+Edit [`zowe.config.json`](zowe.config.json):
 
+* Follow the inline comments and guidance in the sample file.
+* Test Zowe access:
 
+  * Open your USS home directory.
+  * Create a folder named `dbbworkspace`.
+
+### 2. Import DBB Sample Configuration Files
+
+Open a VS Code terminal and run the following `scp` commands to copy configuration files. Replace `yourID`, `yourHost`, and verify your DBB install path:
+
+```sh
+scp yourID@yourHost:/usr/lpp/IBM/dbb/build/*.yaml                  config/build
+scp yourID@yourHost:/usr/lpp/IBM/dbb/samples/languages/*.yaml     config/build
+```
+
+### 3. Customize the Language YAML
+
+Open [`Languages.yaml`](config/build/Languages.yaml#63) and:
+
+* Uncomment the required section.
+* Set `SIGYCOMP` to your COBOL compiler PDS name.
+
+### 4. Configure the Workspace
+
+Edit [`zdevops.code-workspace`](zdevops.code-workspace):
+
+* Set your personal z/OS **HLQ** for PDS allocation:
+
+  ```json
+  "dbbHlq": "<your.HLQ>"
+  ```
+* Set the Zowe **CLI profile** created earlier:
+
+  ```json
+  "defaultCliProfile": "<your-profile>"
+  ```
+
+Activate the workspace:
+
+* Click the **Open Workspace** button (bottom-right in VS Code).
+  ![Open Workspace](doc/open_wksp.png)
+
+---
+
+## 🧪 Phase 2 – Run a Feature Build
+
+1. Create a `dbbworkspace` directory in your USS home.
+2. Create a new Git branch.
+3. Modify a sample COBOL program.
+4. In VS Code, run:
+
+   * `IBM User Build with Full Upload` – to initialize or refresh the `dbb-app.yaml` configuration.
+   * Then use `IBM User Build` – for faster subsequent builds.
+5. Review logs (SYSOUT, SYSPRINT) from the local copies of compiler/link-edit output.
+6. Push the branch to your GitHub server.
+
+---
+
+## 🚀 Phase 3 – Run a Pipeline
+
+Run a pipeline using your CI/CD tool (e.g., Jenkins or GitHub Actions) integrated with the DBB project.
+
+---
