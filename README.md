@@ -68,6 +68,18 @@ Activate the workspace:
 * Click the **Open Workspace** button (bottom-right in VS Code).
   ![Open Workspace](doc/open_wksp.png)
 
+### 5. Test DBB user Build  
+* Commit all changes to this repo and push it to git 
+* SSH into your zOS host and clone this repo under Z DewvOps Admins home dir
+* Then run this cli:
+
+
+BBMM need to set the dbb_home ... env vars . 
+
+
+```ssh
+dbb build file --hlq ibmuser.vscode  asample.cbl 
+```
 ---
 
 ## 🧪 Phase 2 – Run a Feature Build

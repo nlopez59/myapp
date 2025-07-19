@@ -2,19 +2,6 @@ name: "poc-app-zapp"
 description: | 
   This is a sample IBM Z Open Editor zapp.yaml for DBB V3. 
   
-  Change the VS Code user's settings.json dbbHLQ to defines the a developer's 
-  personal PDS HLQ's for building and testing a feature. 
-
-  ref: 
-    - DBB v3:               https://www.ibm.com/docs/en/dbb/3.0?topic=samples-user-build
-    - OpenEditor zapp.yaml: https://ibm.github.io/zopeneditor-about/Docs/zapp.html#zapp-use-cases  
-  
-  Tech Notes: - The main settings.json is in this multiRoot project's workspace file. Its not a local  file. Simple project can use .vscode/settings.json 
-              - OpenEdit fails to mkdir the users dbbWorkspace so do it manually before runing  
-              - Always run a full upload build to init the working dir with dbb-build.yaml
-              - the user zapp  "dbbWorkspace": "/u/ibmuser/vscode",
-              - the user zapp  "dbbHlq": "IBMUSER.VSCODE"   
-
 
 version: "3.0.0"
 author:
@@ -22,20 +9,6 @@ author:
 
 
 profiles:
-- name: "Idz_dbb-userbuild"
-  type: "dbb"
-  settings:
-    #command: ". /etc/profile; export DBB_BUILD=/u/ibmuser/zdevops/conf/build; $DBB_HOME/bin/sclient 127.0.0.1 8080 $DBB_HOME/bin/dbb  build"
-    # /etc/profile has all the env vars for dbb++
-    command: ". /etc/profile; time $DBB_HOME/bin/dbb  build"
-    lifecycle: "user"
-    lifecycleArgs:
-    - "--hlq ${zopeneditor.userbuild.userSettings.dbbHlq} "
-    additionalDependencies:
-    - "dbb-app.yaml"
-    logFilePatterns:
-    - "*.log"
-
 - name: "dbb-userbuild"
   type: "dbb"
   settings:    
