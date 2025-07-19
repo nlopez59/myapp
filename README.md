@@ -13,7 +13,7 @@ Once these steps are completed and verified, the setup can be rolled out to a **
 
 ## ✅ Prerequisites
 
-* Install VS COde and the Git extension
+* Install VS Code and the Git extension
 * Install **DBB v3** (or newer) on zOS and note the installation path (usually `/usr/lpp/IBM/dbb`).
 * Ensure all VS Code users:
 
@@ -51,9 +51,9 @@ Open [`Languages.yaml`](config/build/Languages.yaml#63) and:
 * Uncomment the required section.
 * Set `SIGYCOMP` to your COBOL compiler PDS name.
 
-### 4. Configure the Workspace
+### 4. Configure the VS Code Settings 
 
-Edit [`zdevops.code-workspace`](zdevops.code-workspace):
+Edit [`settings.json`](.vscode/settings.json):
 
 * Set your personal z/OS **HLQ** for PDS allocation:
 
