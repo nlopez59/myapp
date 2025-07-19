@@ -11,7 +11,8 @@ Once these steps are completed and verified, the setup can be rolled out to a **
 
 ## ✅ Prerequisites
 
-* Install **DBB v3** (or newer) and note the installation path (usually `/usr/lpp/IBM/dbb`).
+* Install VS COde and the Git extension
+* Install **DBB v3** (or newer) on zOS and note the installation path (usually `/usr/lpp/IBM/dbb`).
 * Ensure all VS Code users:
 
   * Have an **OMVS RACF segment**.
