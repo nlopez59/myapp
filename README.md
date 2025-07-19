@@ -10,22 +10,32 @@ The first phase is to configure the varaious tools for Developers.  Once all com
 - Obtain the install paths for: 
     - DBB its normally in ```/usr/lpp/IBM/dbb```    
     - Git for Z (check you SMPE install note)
-- Ensure VS Code Users have an OMVS RACF segment with a persoanl USS Home dir.  
+- Ensure VS Code Users have an OMVS RACF segment with a personal USS Home dir.  
     - Define DBB and Git on the z DevOps Admin's home directory. This profile can be merged into /etc/profile for access by all users at a later time.  
 
 ## Phase1 - Z DevOps Configuration
 - Edit zowe.config.json
-    - add zOSMF or RSEAPI connection details
-    - If using zOSMF, add the connect SSH details using the Z DevOps admin RACF user
-    - Test Zowe on Z
-        - open the users USS home dir 
-        - make a folder called 'dbbworkspace' 
-            
-- Edit dbb-build.yaml 
-    - lanaguages.yaml - add the system PDS for the cobol compiler, linkedit 
+    - Update the RSEAPI connection details  
+    ![zowe rse](image-1.png)  
+    - Test Zowe:
+        - open the your USS home dir 
+        - create a folder called 'dbbworkspace' 
 
-- Edit the zapp.yaml
-    - add a HLQ for the DBB build 
+- copy the dbb sample config - change the uss path to match you env 
+    - from the vs code terminal run this - but use your DBB install path 
+        scp ibmuser@taz-zos:/usr/lpp/IBM/idz/usr/lpp/IBM/dbb/build/*.yaml  config\build
+        scp ibmuser@taz-zos:/usr/lpp/IBM/idz/usr/lpp/IBM/dbb/samples/languages/*.yaml config\build
+
+
+- Edit config/build/Languages.yaml 
+    - add the system PDS for the cobol compiler (SIGYCOMP). 
+    ![Lang Yaml](doc/lang-yaml.png)
+
+- Edit the zdevops.code-workspace 
+    - add your HLQ to  "dbbHlq"
+    - add your rse zowe profile to  "defaultCliProfile"
+    - open this workspace fodler as a workspace i nvs Code (botton right blue box)
+    ![alt text](image.png)
 
 
 Run A Feature build: 

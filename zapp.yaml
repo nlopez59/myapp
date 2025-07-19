@@ -38,18 +38,8 @@ profiles:
 
 - name: "dbb-userbuild"
   type: "dbb"
-  settings:
-    #command: ". /etc/profile; export DBB_BUILD=/u/ibmuser/zdevops/conf/build; $DBB_HOME/bin/dbb build"
-    #command: ". /etc/profile; time dbb  build"
-    
-    # Notes on using DBBS on virt zOS env:
-    # Its broken on ODT! Dont use it  
-    #  - As of dbb 3.0.1 the sclient moved from bin to lib and on a new port.  
-    #  - dbbs daemon process defined /etc/dbb  but its old so replace it  (see my repo)
-    #  - The /usr/lpp/IBM/dbb/conf/startdaemon.sh port now port 8180 
-
-    command: ". /etc/profile; dbb       build "
-
+  settings:    
+    command: ". ./.profile; dbb   build "
 
     lifecycle: "user"
     lifecycleArgs:
@@ -73,22 +63,4 @@ propertyGroups:
       locations:
         - "**/copybook"
         - "**/bms"
-    - name: syslib
-      type: mvs
-      locations:
-        - "IBMUSER.IDZ.BMS.COPY"
-        - "IBMUSER.VSCODE.BMS.COPY"
-        - "CICSTS61.CICS.SDFHCOB"
-        - "IDZ.V17R0M0.SEQASAMP"
-
-- name: asm-maclib 
-  language: hlasm
-  libraries:
-    - name: maclib
-      type: local
-      locations:
-        - "**/maclib"
-    - name: syslib
-      type: mvs
-      locations:
-        - "SYS1.MACLIB" 
+    
