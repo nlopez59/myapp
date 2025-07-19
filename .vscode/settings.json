@@ -1,10 +1,14 @@
 {
-	"folders": [
+  "folders": [
     {
       "path": "."
     }
   ],
-	"settings": {
+  "files.watcherExclude": {
+    "**/.git/objects/**": true
+  },
+  "workbench.startupEditor": "readme", 
+  "settings": {
     "zopeneditor.welcomePage.show": false,
     "zopeneditor.userbuild.enabled": true,
     
@@ -21,7 +25,7 @@
       },
     
     "zopeneditor.zowe": {
-      "defaultCliProfile": "rse"
+      "defaultCliProfile": "rse2"
       }
   }
 }

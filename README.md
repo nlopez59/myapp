@@ -3,6 +3,8 @@
 **Purpose:**
 Configure VS Code with DBB, Zowe, and Open Editor to enable mainframe developers to build and test applications using modern DevOps tools.
 
+Note: Always open this project's workspace file.
+
 > 🔒 Typically, these steps are performed by the **Z DevOps Admin**, who may collaborate with the **z/OS SysProg**, **Security**, and **Network** teams as needed.
 
 Once these steps are completed and verified, the setup can be rolled out to a **small** group of developers for hands-on testing, learning, and further customization.

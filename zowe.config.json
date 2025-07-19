@@ -4,10 +4,10 @@
     "Notes": "A sample RSEAPI zowe profile. Change host, port and other values to match your env",
 
     "profiles": {
-        "rse": {
+        "rse2": {
             "type": "rse",
             "properties": {
-                "host": "taz-zos",  
+                "host": "163.109.87.254",  
                 "protocol": "https",
                 "port": 8195,                
                 "rejectUnauthorized": false,
@@ -23,6 +23,6 @@
     "autoStore": true,
 
     "defaults": {
-        "rse": "rse"        
+        "rse": "rse2"        
     }
 }
