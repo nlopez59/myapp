@@ -7,7 +7,7 @@
         "rse": {
             "type": "rse",
             "properties": {
-                "host": "taz-zos",  
+                "host": "163.109.87.254",  
                 "protocol": "https",
                 "port": 8195,                
                 "rejectUnauthorized": false,
